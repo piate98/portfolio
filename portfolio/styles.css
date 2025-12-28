@@ -9,6 +9,16 @@
   --max:980px;
 }
 
+/* ✅ Dark theme overrides */
+html[data-theme="dark"]{
+  --bg:#0b1220;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:rgba(255,255,255,.12);
+  --card:#0f172a;
+  --shadow:0 1px 2px rgba(0,0,0,.45);
+}
+
 *{box-sizing:border-box}
 
 body{
@@ -25,11 +35,12 @@ img{display:block;max-width:100%}
 /* HEADER */
 header{
   border-bottom:1px solid var(--border);
-  background:#fff;
+  background:var(--card);
   position:sticky;
   top:0;
   z-index:10;
 }
+
 .nav{
   max-width:var(--max);
   margin:0 auto;
@@ -39,14 +50,63 @@ header{
   align-items:center;
   font-size:14px;
 }
+
 .brand{font-weight:800}
+
+/* ✅ Right side group (links + toggle) */
+.navRight{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
 .navlinks a{
   margin-left:12px;
   color:var(--muted);
   padding:6px 8px;
   border-radius:10px;
 }
-.navlinks a:hover{background:#f3f4f6;color:var(--text)}
+.navlinks a:hover{
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+}
+
+/* ✅ Theme toggle button */
+.themeToggle{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:12px;
+  padding:8px 10px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+.themeToggle:hover{
+  background:rgba(255,255,255,.06);
+}
+.themeIcon{
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+}
+.themeToggle svg{
+  width:18px;
+  height:18px;
+}
+
+/* Show moon in light mode, sun in dark mode */
+.iconSun{ display:none; }
+html[data-theme="dark"] .iconSun{ display:block; }
+html[data-theme="dark"] .iconMoon{ display:none; }
+
+.themeLabel{
+  font-size:13px;
+  color:var(--muted);
+}
 
 .container{
   max-width:var(--max);
@@ -60,14 +120,14 @@ header{
 .heroCard{
   border:1px solid var(--border);
   border-radius:calc(var(--radius) + 4px);
-  background:#fff;
+  background:var(--card);
   box-shadow:var(--shadow);
   padding:18px;
 }
 
 .heroGrid{
   display:grid;
-  grid-template-columns: 1fr;  /* mobile-first */
+  grid-template-columns: 1fr;
   gap:14px;
   align-items:center;
 }
@@ -78,7 +138,7 @@ header{
   border-radius:18px;
   border:1px solid var(--border);
   object-fit:cover;
-  background:#f3f4f6;
+  background:rgba(255,255,255,.06);
   box-shadow:var(--shadow);
   flex:0 0 auto;
 }
@@ -115,7 +175,7 @@ header{
   padding:10px 14px;
   border-radius:12px;
   border:1px solid var(--border);
-  background:#fff;
+  background:var(--card);
   font-size:14px;
   box-shadow:var(--shadow);
   display:inline-flex;
@@ -127,6 +187,11 @@ header{
   background:#111827;
   color:#fff;
   border-color:#111827;
+}
+html[data-theme="dark"] .btn.primary{
+  background:#e5e7eb;
+  color:#0b1220;
+  border-color:#e5e7eb;
 }
 
 /* SECTION TITLE */
@@ -142,18 +207,18 @@ section{margin-top:28px}
 .linksCard{
   border:1px solid var(--border);
   border-radius:calc(var(--radius) + 4px);
-  background:#fff;
+  background:var(--card);
   box-shadow:var(--shadow);
   padding:14px;
   display:flex;
   flex-direction:column;
   gap:10px;
-  overflow:hidden; /* safety */
+  overflow:hidden;
 }
 
 .linksGrid{
   display:grid;
-  grid-template-columns: 1fr; /* mobile */
+  grid-template-columns: 1fr;
   gap:10px;
 }
 
@@ -165,11 +230,11 @@ section{margin-top:28px}
   border:1px solid var(--border);
   border-radius:14px;
   padding:12px 12px;
-  background:#fff;
+  background:var(--card);
   transition:background .12s ease;
-  min-width:0; /* ✅ important: prevents overflow in grid */
+  min-width:0;
 }
-.linkItem:hover{ background:#f9fafb; }
+.linkItem:hover{ background:rgba(255,255,255,.06); }
 
 .linkLeft{
   display:flex;
@@ -183,7 +248,7 @@ section{margin-top:28px}
   height:40px;
   border-radius:12px;
   border:1px solid var(--border);
-  background:#fff;
+  background:var(--card);
   box-shadow:var(--shadow);
   display:grid;
   place-items:center;
@@ -216,7 +281,7 @@ section{margin-top:28px}
   border:1px solid var(--border);
   padding:6px 10px;
   border-radius:999px;
-  background:#fff;
+  background:var(--card);
   flex:0 0 auto;
 }
 
@@ -231,19 +296,19 @@ section{margin-top:28px}
   border:1px solid var(--border);
   border-radius:var(--radius);
   overflow:hidden;
-  background:#fff;
+  background:var(--card);
   box-shadow:var(--shadow);
   transition:.15s;
 }
 .project-card:hover{
   transform:translateY(-2px);
-  box-shadow:0 10px 24px rgba(0,0,0,.1);
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
 }
 
 .thumb{
   position:relative;
   height:160px;
-  background:#f3f4f6;
+  background:rgba(255,255,255,.06);
   overflow:hidden;
 }
 .thumb img{
@@ -280,7 +345,7 @@ section{margin-top:28px}
 .tag{
   font-size:12px;
   padding:4px 8px;
-  background:#f3f4f6;
+  background:rgba(255,255,255,.06);
   border-radius:999px;
   border:1px solid var(--border);
 }
@@ -291,6 +356,7 @@ section{margin-top:28px}
   border-radius:999px;
   border:1px solid var(--border);
   color:var(--muted);
+  background:var(--card);
 }
 
 /* SKILLS */
@@ -304,7 +370,7 @@ section{margin-top:28px}
   border-radius:var(--radius);
   padding:14px;
   box-shadow:var(--shadow);
-  background:#fff;
+  background:var(--card);
 }
 
 @media (min-width:768px){
@@ -319,13 +385,11 @@ section{margin-top:28px}
   .avatar{ width:110px; height:110px; }
   .heroTitle{ font-size:30px; }
 
-  /* 2 columns on normal desktop widths */
   .linksGrid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* 4 columns if screen is truly wide */
 @media (min-width:1100px){
   .linksGrid{
     grid-template-columns: repeat(4, minmax(0, 1fr));
